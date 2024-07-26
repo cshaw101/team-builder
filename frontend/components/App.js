@@ -19,9 +19,15 @@ I enjoy bringing creativity and aesthetics to the digital world."
   },
 ]
 
+
 export default function App() {
   const [members, setMembers] = useState(teamMembers)
   const [editing, setEditing] = useState(null)
+  const [inputValue, setInputValue] = useState({
+  fname: '',
+  lname: '',
+  bio: ''
+})
   // ✨ Create a third state to track the values of the inputs
 
   useEffect(() => {
@@ -36,6 +42,12 @@ export default function App() {
     // ✨ This is the change handler for your text inputs and your textarea.
     // You can check `evt.target.id` to know which input changed
     // and then you can use `evt.target.value` to update the state of the form
+    const { id, value } = evt.target
+   setInputValue({
+    ...inputValue,
+    [id]: value,
+   })
+  console.log(inputValue)
   }
   const edit = id => {
     // ✨ Put this function inside a click handler for the <button>Edit</button>.
@@ -45,6 +57,7 @@ export default function App() {
   const submitNewMember = () => {
     // This takes the values of the form and constructs a new member object,
     // which is then concatenated at the end of the `members` state
+
   }
   const editExistingMember = () => {
     // ✨ This takes the values of the form and replaces the data of the
@@ -80,17 +93,17 @@ export default function App() {
         <form>
           <div>
             <label htmlFor="fname">First Name </label>
-            <input id="fname" type="text" placeholder="Type First Name" />
+            <input onChange={onChange} id="fname" type="text" placeholder="Type First Name" />
           </div>
 
           <div>
             <label htmlFor="lname">Last Name </label>
-            <input id="lname" type="text" placeholder="Type Last Name" />
+            <input onChange={onChange} id="lname" type="text" placeholder="Type Last Name" />
           </div>
 
           <div>
             <label htmlFor="bio">Bio </label>
-            <textarea id="bio" placeholder="Type Bio" />
+            <textarea onChange={onChange} id="bio" placeholder="Type Bio" />
           </div>
 
           <div>
