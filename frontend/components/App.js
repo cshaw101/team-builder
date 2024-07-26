@@ -36,6 +36,7 @@ export default function App() {
     // with the data belonging to the member with id 2.
     // On the other hand, if the `editing` state changes back to null
     // then we need to reset the form back to empty values
+    
   }, [editing])
 
   const onChange = evt => {
@@ -53,6 +54,7 @@ export default function App() {
     // ✨ Put this function inside a click handler for the <button>Edit</button>.
     // It should change the value of `editing` state to be the id of the member
     // whose Edit button was clicked
+    setEditing(id)
   }
   const submitNewMember = () => {
     const newMember = {
@@ -93,7 +95,7 @@ export default function App() {
                   <h4>{mem.fname} {mem.lname}</h4>
                   <p>{mem.bio}</p>
                 </div>
-                <button>Edit</button>
+                <button onClick={() => edit(mem.id)}>Edit</button>
               </div>
             ))
           }
