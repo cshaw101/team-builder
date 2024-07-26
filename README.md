@@ -80,9 +80,9 @@ The edit button on each member, when clicked, should put the id of the member in
 
 2.x Check in the React Dev Tools that indeed clicking on `edit` member puts the id of that particular member in the `editing` slice.
 
-3. Flesh out the effect. You have hints in the comments.
+3.x Flesh out the effect. You have hints in the comments.
 
-4. If the above is working, clicking the edit button should populate the form with the data of the member being edited.
+4.x If the above is working, clicking the edit button should populate the form with the data of the member being edited.
 
 5. Implement the `editExistingMember` function. It will do a state change on `members`, replacing the edited member with the values from the form.
 

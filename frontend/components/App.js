@@ -31,13 +31,23 @@ export default function App() {
   // ✨ Create a third state to track the values of the inputs
 
   useEffect(() => {
-    // ✨ If the `editing` state changes from null to the number 2 (for example)
-    // this means we need to populate the inputs of the form
-    // with the data belonging to the member with id 2.
-    // On the other hand, if the `editing` state changes back to null
-    // then we need to reset the form back to empty values
-    
-  }, [editing])
+    if (editing !== null) {
+      const memberToEdit = members.find(member => member.id === editing);
+      if (memberToEdit) {
+        setInputValue({
+          fname: memberToEdit.fname,
+          lname: memberToEdit.lname,
+          bio: memberToEdit.bio
+        });
+      }
+    } else {
+      setInputValue({
+        fname: '',
+        lname: '',
+        bio: ''
+      });
+    }
+  }, [editing, members]);
 
   const onChange = evt => {
     // ✨ This is the change handler for your text inputs and your textarea.
@@ -71,18 +81,29 @@ export default function App() {
     });
   };
   const editExistingMember = () => {
-    // ✨ This takes the values of the form and replaces the data of the
-    // member in the `members` state whose id matches the `editing` state
-  }
-  const onSubmit = evt => {
-    // ✨ This is the submit handler for your form element.
-    // It will call either `submitNewMember` or `editExistingMember`
-    // depending on whether the `editing` state is null or has an id in it.
-    // Don't allow the page to reload! Prevent the default behavior
-    // and clean up the form after submitting
-    evt.preventDefault()
-    submitNewMember()
-  }
+    setMembers(members.map(member =>
+      member.id === editing ? { 
+        ...member, 
+        fname: inputValue.fname, 
+        lname: inputValue.lname, 
+        bio: inputValue.bio } 
+        : member
+    ));
+    setEditing(null);
+  };
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    if (editing !== null) {
+      editExistingMember();
+    } else {
+      submitNewMember();
+    }
+    setInputValue({
+      fname: '',
+      lname: '',
+      bio: ''
+    });
+  };
   return (
     <div>{/* ✨ Fix the JSX by wiring the necessary values and event handlers */}
       <div id="membersList">
