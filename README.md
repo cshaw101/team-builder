@@ -62,7 +62,7 @@ You have a [detailed mock](https://bloominstituteoftechnology.github.io/W_S7M2_P
 
 3.x Implement the `onChange` handler and wire it to the inputs. You have further hints in the comments.
 
-4. Implement the `submitNewMember` to create a new member using the form values in state.
+4.x Implement the `submitNewMember` to create a new member using the form values in state.
 
 5. Have the `onSubmit` handler just invoke the `submitNewMember` unconditionally, and wire it to the form. We will implement edit later.
 

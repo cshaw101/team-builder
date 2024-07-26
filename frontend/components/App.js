@@ -55,10 +55,19 @@ export default function App() {
     // whose Edit button was clicked
   }
   const submitNewMember = () => {
-    // This takes the values of the form and constructs a new member object,
-    // which is then concatenated at the end of the `members` state
-
-  }
+    const newMember = {
+      id: getId(),
+      fname: inputValue.fname,
+      lname: inputValue.lname,
+      bio: inputValue.bio
+    };
+    setMembers([...members, newMember]);
+    setInputValue({
+      fname: '',
+      lname: '',
+      bio: ''
+    });
+  };
   const editExistingMember = () => {
     // ✨ This takes the values of the form and replaces the data of the
     // member in the `members` state whose id matches the `editing` state
@@ -69,6 +78,8 @@ export default function App() {
     // depending on whether the `editing` state is null or has an id in it.
     // Don't allow the page to reload! Prevent the default behavior
     // and clean up the form after submitting
+    evt.preventDefault()
+    submitNewMember()
   }
   return (
     <div>{/* ✨ Fix the JSX by wiring the necessary values and event handlers */}
@@ -90,20 +101,20 @@ export default function App() {
       </div>
       <div id="membersForm">
         <h2>{editing ? 'Edit' : 'Add'} a Team Member</h2>
-        <form>
+        <form onSubmit={onSubmit}>
           <div>
             <label htmlFor="fname">First Name </label>
-            <input onChange={onChange} id="fname" type="text" placeholder="Type First Name" />
+            <input onChange={onChange} id="fname" type="text" value={inputValue.fname} placeholder="Type First Name" />
           </div>
 
           <div>
             <label htmlFor="lname">Last Name </label>
-            <input onChange={onChange} id="lname" type="text" placeholder="Type Last Name" />
+            <input onChange={onChange} id="lname" type="text" value={inputValue.lname} placeholder="Type Last Name" />
           </div>
 
           <div>
             <label htmlFor="bio">Bio </label>
-            <textarea onChange={onChange} id="bio" placeholder="Type Bio" />
+            <textarea onChange={onChange} id="bio" value={inputValue.bio} placeholder="Type Bio" />
           </div>
 
           <div>
